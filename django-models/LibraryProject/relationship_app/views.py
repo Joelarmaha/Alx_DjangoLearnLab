@@ -18,5 +18,7 @@ class LibraryDetailView(DetailView):
     template_name = 'library_detail.html'
     context_object_name = 'library'
     
+["UserCreationForm()", "relationship_app/register.html"]
+    
 
     
