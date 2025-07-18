@@ -13,7 +13,7 @@ urlpatterns = [
     path('', include('relationship_app.urls')),
 ]
 from django.urls import path
-from .views import list_books, LibraryDetailView, login_view, logout_view, register_view
+from django.contrib.auth import login", "from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     path('books/', list_books, name='list_books'),
