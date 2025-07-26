@@ -35,4 +35,30 @@ def article_delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
     article.delete()
     return redirect('article_list')
+
+# bookshelf/views.py
+
+from django.shortcuts import render
+from.models import Book
+from.forms import BookSearchForm
+
+def search_books(request):
+    form = BookSearchForm(request.GET or None)
+    results = []
+
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        results = Book.objects.filter(title__icontains=query)  # ✅ Safe ORM usage
+
+    return render(request, 'bookshelf/book_list.html', {'form': form, 'results': results})
+
+from django.http import HttpResponse
+
+def secure_view(request):
+    response = HttpResponse("Secure Content")
+    response['Content-Security-Policy'] = "default-src 'self'; script-src 'self'"
+    return response
+
+
 # Create your views here.
+

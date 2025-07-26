@@ -121,3 +121,41 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# LibraryProject/settings.py
+
+# ⚠️ Turn off debug mode in production
+DEBUG = False
+
+# ✅ Prevent content type sniffing (browser-side)
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# ✅ Enable XSS filter in the browser
+SECURE_BROWSER_XSS_FILTER = True
+
+# ✅ Prevent your site from being rendered in a frame (clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# ✅ Ensure cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# ⚠️ Set this to the domain you allow in production
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost']  # Update accordingly
+
+# SECURITY SETTINGS
+DEBUG = False  # ✅ Never use DEBUG=True in production
+
+# ✅ Prevent browsers from MIME-sniffing a response away from the declared content-type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# ✅ Enables the browser’s XSS filtering and helps prevent XSS attacks
+SECURE_BROWSER_XSS_FILTER = True
+
+# ✅ Prevent your site from being framed (clickjacking protection)
+X_FRAME_OPTIONS = 'DENY'
+
+# ✅ Use secure cookies
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
