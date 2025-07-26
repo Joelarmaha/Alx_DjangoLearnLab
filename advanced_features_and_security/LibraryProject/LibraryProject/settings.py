@@ -140,6 +140,59 @@ X_FRAME_OPTIONS = 'DENY'
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
+# settings.py
+
+# ✅ Redirect all HTTP traffic to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# ✅ Enforce HSTS (HTTP Strict Transport Security) for one year (in seconds)
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+
+# ✅ Apply HSTS to all subdomains
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# ✅ Allow domain to be preloaded by browsers for HSTS
+SECURE_HSTS_PRELOAD = True
+
+# settings.py
+
+# ✅ Only transmit session cookies via HTTPS
+SESSION_COOKIE_SECURE = True
+
+# ✅ Only transmit CSRF cookies via HTTPS
+CSRF_COOKIE_SECURE = True
+
+# settings.py
+
+# ✅ Prevent clickjacking
+X_FRAME_OPTIONS = 'DENY'
+
+# ✅ Block MIME-type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# ✅ Enable XSS protection in browsers
+SECURE_BROWSER_XSS_FILTER = True
+
+# === HTTPS and Security Settings ===
+
+# Force HTTPS
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP traffic to HTTPS
+
+# Use HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to subdomains
+SECURE_HSTS_PRELOAD = True  # Allow preload in browsers
+
+# Secure cookies
+SESSION_COOKIE_SECURE = True  # Only send session cookies via HTTPS
+CSRF_COOKIE_SECURE = True     # Only send CSRF cookies via HTTPS
+
+# Secure headers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent content type sniffing
+SECURE_BROWSER_XSS_FILTER = True    # Enable browser XSS filtering
+
+
 # ⚠️ Set this to the domain you allow in production
 ALLOWED_HOSTS = ['yourdomain.com', 'localhost']  # Update accordingly
 
