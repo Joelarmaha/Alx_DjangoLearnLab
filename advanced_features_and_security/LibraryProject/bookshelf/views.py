@@ -39,8 +39,8 @@ def article_delete(request, pk):
 # bookshelf/views.py
 
 from django.shortcuts import render
-from.models import Book
-from.forms import ExampleForm
+from .models import Book
+from .forms import ExampleForm
 
 def search_books(request):
     form = BookSearchForm(request.GET or None)
