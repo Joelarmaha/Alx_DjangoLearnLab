@@ -4,12 +4,12 @@ from .models import Article
 from .forms import ArticleForm
 
 @permission_required('article_app.can_view', raise_exception=True)
-def article_list(request):
+def book_list(request):
     articles = Article.objects.all()
     return render(request, 'article_app/article_list.html', {'articles': articles})
 
 @permission_required('article_app.can_create', raise_exception=True)
-def article_create(request):
+def books(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
