@@ -192,7 +192,6 @@ X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent content type sniffing
 SECURE_BROWSER_XSS_FILTER = True    # Enable browser XSS filtering
 
-
 # ⚠️ Set this to the domain you allow in production
 ALLOWED_HOSTS = ['yourdomain.com', 'localhost']  # Update accordingly
 
@@ -212,3 +211,5 @@ X_FRAME_OPTIONS = 'DENY'
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
+SECURE_PROXY_SSL_HEADER = True
+HTTP_X_FORWARDED_PROTO = True
