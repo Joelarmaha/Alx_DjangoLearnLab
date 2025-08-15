@@ -23,7 +23,7 @@ class PostForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Post title'}),
             'content': forms.Textarea(attrs={'rows': 8, 'placeholder': 'Write your content here...'}),
         }
-        
+
     TagWidget()
 
         def __init__(self, *args, **kwargs):
