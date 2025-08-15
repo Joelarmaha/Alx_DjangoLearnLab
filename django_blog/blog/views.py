@@ -76,7 +76,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return post.author == self.request.user
 
 @login_required
-def add_comment(request, post_id):
+def CommentCreateView(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -93,7 +93,7 @@ def add_comment(request, post_id):
 
 
 @login_required
-def edit_comment(request, comment_id):
+def CommentUpdateView(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if comment.author != request.user:
         messages.error(request, "You do not have permission to edit this comment.")
@@ -111,7 +111,7 @@ def edit_comment(request, comment_id):
 
 
 @login_required
-def delete_comment(request, comment_id):
+def CommentDeleteView(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     if comment.author != request.user:
         messages.error(request, "You do not have permission to delete this comment.")
@@ -122,3 +122,5 @@ def delete_comment(request, comment_id):
         messages.success(request, "Your comment has been deleted!")
         return redirect('post_detail', pk=comment.post.id)
     return render(request, 'blog/comment_confirm_delete.html', {'comment': comment})
+
+CommentCreateView", "CommentUpdateView", "CommentDeleteView"
