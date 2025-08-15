@@ -18,11 +18,13 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content', 'tags']
 
-        Tagwidgets = {
+
+        widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Post title'}),
             'content': forms.Textarea(attrs={'rows': 8, 'placeholder': 'Write your content here...'}),
         }
-
+        
+    TagWidget()
 
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
