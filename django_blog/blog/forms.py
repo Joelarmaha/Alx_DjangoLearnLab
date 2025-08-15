@@ -16,11 +16,17 @@ class RegisterForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tags']
+
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Post title'}),
             'content': forms.Textarea(attrs={'rows': 8, 'placeholder': 'Write your content here...'}),
         }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['tags'].help_text = "Enter comma-separated tags"
+
 
     class CommentForm(forms.ModelForm):
         class Meta:
@@ -29,3 +35,4 @@ class PostForm(forms.ModelForm):
             widgets = {
                 'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Write your comment...'})
             }
+

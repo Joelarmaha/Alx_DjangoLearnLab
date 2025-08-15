@@ -28,3 +28,8 @@
   </main>
 </body>
 </html>
+
+<form action="{% url 'search_posts' %}" method="get">
+    <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>

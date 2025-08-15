@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Post, Comment
 from .forms import CommentForm
-
+from django.db.models import Q
 
 def register_view(request):
     if request.method == 'POST':
@@ -23,6 +23,7 @@ def register_view(request):
     else:
         form = RegisterForm()
     return render(request, 'blog/register.html', {'form': form})
+
 
 # Profile View
 @login_required
@@ -66,6 +67,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         return post.author == self.request.user
 
+
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/posts/post_confirm_delete.html'
@@ -74,6 +76,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return post.author == self.request.user
+
 
 @login_required
 def CommentCreateView(request, post_id):
@@ -123,4 +126,15 @@ def CommentDeleteView(request, comment_id):
         return redirect('post_detail', pk=comment.post.id)
     return render(request, 'blog/comment_confirm_delete.html', {'comment': comment})
 
-CommentCreateView", "CommentUpdateView", "CommentDeleteView"
+
+
+def search_posts(request):
+    query = request.GET.get('q')
+    results = []
+    if query:
+        results = Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)  # works with django-taggit
+        ).distinct()
+    return render(request, 'blog/search_results.html', {'query': query, 'results': results})
