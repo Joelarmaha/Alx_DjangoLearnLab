@@ -62,16 +62,16 @@ class UnfollowUserView(APIView):
 
 
 class ListFollowingView(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOnly]
-    serializer_class = UserPublicSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CustomUser.objects.all()
 
     def get_queryset(self):
         return self.request.user.following.all().order_by("username")
 
 
 class ListFollowersView(generics.ListAPIView):
-    permission_classes = [IsAuthenticatedOnly]
-    serializer_class = UserPublicSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = CustomUser.objects.all()
 
     def get_queryset(self):
         return self.request.user.followers.all().order_by("username")
