@@ -15,5 +15,13 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+    def follow(self, other_user):
+        if other_user != self:
+            self.following.add(other_user)
+
+    def unfollow(self, other_user):
+        if other_user != self:
+            self.following.remove(other_user)
+
 
 

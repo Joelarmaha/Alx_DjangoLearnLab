@@ -1,6 +1,8 @@
 from rest_framework import viewsets, permissions, filters
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
+from rest_framework import permissions, generics
+from rest_framework.pagination import PageNumberPagination
 
 
 class IsAuthorOrReadOnly(permissions.BasePermission):
@@ -29,3 +31,22 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
+class FeedPagination(PageNumberPagination):
+    page_size = 10
+
+
+class FeedView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = PostSerializer
+    pagination_class = FeedPagination
+
+    def get_queryset(self):
+        user = self.request.user
+        # Posts authored by users the current user follows
+        return (
+            Post.objects.filter(author__in=user.following.all())
+            .select_related("author")
+            .prefetch_related("comments")
+            .order_by("-created_at")
+        )

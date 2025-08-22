@@ -6,6 +6,7 @@ from accounts.models import User
 
 User = get_user_model().objects.create_user
 
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -42,3 +43,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email', 'bio', 'profile_picture', 'followers')
 
+
+class UserPublicSerializer(serializers.ModelSerializer):
+    followers_count = serializers.IntegerField(source="followers.count", read_only=True)
+    following_count = serializers.IntegerField(source="following.count", read_only=True)
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "first_name", "last_name", "followers_count", "following_count"]
