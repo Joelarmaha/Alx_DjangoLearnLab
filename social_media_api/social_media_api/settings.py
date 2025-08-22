@@ -136,3 +136,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+DEBUG = False
+
+ALLOWED_HOSTS from env var DJANGO_ALLOWED_HOSTS
