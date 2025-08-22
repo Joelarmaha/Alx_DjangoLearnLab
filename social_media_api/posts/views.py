@@ -42,7 +42,7 @@ class FeedView(generics.ListAPIView):
     pagination_class = FeedPagination
 
     def get_queryset(self):
-        user = self.request.user
+        user = following.all()
         # Posts authored by users the current user follows
         return (
             Post.objects.filter(author__in=following_users).order_by
