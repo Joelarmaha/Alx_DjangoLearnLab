@@ -45,7 +45,7 @@ class FeedView(generics.ListAPIView):
         user = self.request.user
         # Posts authored by users the current user follows
         return (
-            Post.objects.filter(author__in=user.following.all())
+            Post.objects.filter(author__in=following_users).order_by
             .select_related("author")
             .prefetch_related("comments")
             .order_by("-created_at")
