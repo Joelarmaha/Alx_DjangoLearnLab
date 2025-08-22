@@ -11,6 +11,3 @@ urlpatterns = [
     path("me/following/", ListFollowingView.as_view(), name="my-following"),
 ]
 
-
-
-]
